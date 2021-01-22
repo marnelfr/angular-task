@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Task} from '../task/task';
+import {TaskDialogData} from './interface/task-dialog-data';
 
 @Component({
   selector: 'app-tast-dialog',
