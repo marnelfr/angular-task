@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Task} from './task/task';
 import {CdkDragDrop, transferArrayItem} from '@angular/cdk/drag-drop';
 import {MatDialog} from '@angular/material/dialog';
+import {TastDialogComponent} from './tast-dialog/tast-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +31,7 @@ export class AppComponent {
     }
 
     newTask(): void {
-        const dialogRef = this.dialog.open(TaskDialogComponent, {
+        const dialogRef = this.dialog.open(TastDialogComponent, {
             width: '270px',
             data: {
                 task: {}
