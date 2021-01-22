@@ -9,11 +9,15 @@ import {MatIconModule} from '@angular/material/icon';
 import { TaskComponent } from './task/task.component';
 import {MatCardModule} from '@angular/material/card';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import { TastDialogComponent } from './tast-dialog/tast-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TaskComponent
+    TaskComponent,
+    TastDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +26,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-    DragDropModule
+    DragDropModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
