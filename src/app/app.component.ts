@@ -30,6 +30,7 @@ export class AppComponent {
         if (event.previousContainer === event.container) {
             return;
         }
+        console.log('drop executed');
         transferArrayItem(
             event.previousContainer.data,
             event.container.data,
