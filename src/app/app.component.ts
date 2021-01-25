@@ -27,8 +27,23 @@ export class AppComponent {
 
     constructor(private dialog: MatDialog) {}
 
-    editTask(list: string, task: Task): void {
-
+    editTask(list: 'done' | 'todo' | 'inProgress', task: Task): void {
+        const dialogRef = this.dialog.open(TastDialogComponent, {
+            width: '270px',
+            data: {
+                task,
+                enableDelete: true,
+            },
+        });
+        dialogRef.afterClosed().subscribe((result: TaskDialogResult) => {
+            const dataList = this[list];
+            const taskIndex = dataList.indexOf(task);
+            if (result.delete) {
+                dataList.splice(taskIndex, 1);
+            } else {
+                dataList[taskIndex] = task;
+            }
+        });
     }
 
     newTask(): void {
