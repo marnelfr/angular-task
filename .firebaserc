@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "angular-tasky": {
+      "hosting": {
+        "todo": [
+          "angular-tasky"
+        ]
+      }
+    }
+  }
+}
