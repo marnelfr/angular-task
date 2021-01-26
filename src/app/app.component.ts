@@ -4,6 +4,7 @@ import {CdkDragDrop, transferArrayItem} from '@angular/cdk/drag-drop';
 import {MatDialog} from '@angular/material/dialog';
 import {TastDialogComponent} from './tast-dialog/tast-dialog.component';
 import {TaskDialogResult} from './tast-dialog/interface/task-dialog-result';
+import {AngularFirestore} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ import {TaskDialogResult} from './tast-dialog/interface/task-dialog-result';
 })
 export class AppComponent {
 
-    todo: Task[] = [
+/*    todo: Task[] = [
         {
           title: 'Finalize angular leaning',
           description: 'I need to master angular leaning before the end of this month'
@@ -24,8 +25,12 @@ export class AppComponent {
     ];
     inProgress: Task[] = [];
     done: Task[] = [];
+*/
+    todo = this.store.collection('todo').valueChanges({idField: 'id'});
+    inProgress = this.store.collection('inProgress').valueChanges({idField: 'id'});
+    done = this.store.collection('done').valueChanges({idField: 'id'});
 
-    constructor(private dialog: MatDialog) {}
+    constructor(private dialog: MatDialog, private store: AngularFirestore) {}
 
     editTask(list: 'done' | 'todo' | 'inProgress', task: Task): void {
         const dialogRef = this.dialog.open(TastDialogComponent, {
@@ -35,13 +40,20 @@ export class AppComponent {
                 enableDelete: true,
             },
         });
-        dialogRef.afterClosed().subscribe((result: TaskDialogResult) => {
+        /*dialogRef.afterClosed().subscribe((result: TaskDialogResult) => {
             const dataList = this[list];
             const taskIndex = dataList.indexOf(task);
             if (result.delete) {
                 dataList.splice(taskIndex, 1);
             } else {
                 dataList[taskIndex] = task;
+            }
+        });*/
+        dialogRef.afterClosed().subscribe((result: TaskDialogResult) => {
+            if (result.delete) {
+                this.store.collection(list).doc(task.id).delete();
+            } else {
+                this.store.collection(list).doc(task.id).update(task);
             }
         });
     }
@@ -53,14 +65,34 @@ export class AppComponent {
                 task: {}
             }
         });
-        dialogRef.afterClosed().subscribe((result: TaskDialogResult) => this.todo.push(result.task));
+        dialogRef.afterClosed().subscribe((result: TaskDialogResult) => this.store.collection('todo').add(result.task));
     }
+
+    /*drop(event: CdkDragDrop<Task[]>): void {
+        if (event.previousContainer === event.container) {
+            return;
+        }
+        console.log('drop executed');
+        transferArrayItem(
+            event.previousContainer.data,
+            event.container.data,
+            event.previousIndex,
+            event.currentIndex
+        );
+    }*/
 
     drop(event: CdkDragDrop<Task[]>): void {
         if (event.previousContainer === event.container) {
             return;
         }
-        console.log('drop executed');
+        const item = event.previousContainer.data[event.previousIndex];
+        this.store.firestore.runTransaction(() => {
+            const promise = Promise.all([
+                this.store.collection(event.previousContainer.id).doc(item.id).delete(),
+                this.store.collection(event.container.id).add(item),
+            ]);
+            return promise;
+        });
         transferArrayItem(
             event.previousContainer.data,
             event.container.data,

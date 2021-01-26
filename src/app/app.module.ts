@@ -15,6 +15,11 @@ import { TastDialogComponent } from './tast-dialog/tast-dialog.component';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
 
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import {AngularFireModule} from '@angular/fire';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +37,9 @@ import {FormsModule} from '@angular/forms';
     MatButtonModule,
     MatDialogModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
