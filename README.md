@@ -23,8 +23,11 @@ To integrate firebase in an angular project, we use the command\
 
 While the installation is pursing, just let the Firebase to collecte CLI usage and error reporti information.\
 
+Edit **firebase** permissions
+> https://firebase.google.com/docs/firestore/security/get-started
 
-
+Learning firebase best pratices
+> https://firebase.google.com/docs/firestore/best-practices
 
 
 
