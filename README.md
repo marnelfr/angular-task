@@ -1,5 +1,9 @@
 # angular-task
+<<<<<<< HEAD
 Let's try to build Google task using angular
+=======
+Let's try to build Google task just to practice angular
+>>>>>>> f2c342c7fb5979df3e8016a779b95409e29cb3b0
 
 **@Input()** and **@Output()** give a child component a way to communicate with its parent component. 
 > **@Input()** allows a parent component to update data in the child component. 
@@ -18,6 +22,7 @@ We can here watch changes on **item** since it"s an *input* property.\
 We can have something like:\
 > **ngOnChanges**(item: string) { //code... }
 
+<<<<<<< HEAD
 To integrate firebase in an angular project, we use the command\
 > ng add **@angular/fire**
 
@@ -28,6 +33,12 @@ Edit **firebase** permissions
 
 Learning firebase best pratices
 > https://firebase.google.com/docs/firestore/best-practices
+=======
+
+
+
+
+>>>>>>> f2c342c7fb5979df3e8016a779b95409e29cb3b0
 
 
 
