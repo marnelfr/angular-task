@@ -122,13 +122,20 @@
               "devServerTarget": "todo:serve:production"
             }
           }
+<<<<<<< HEAD
         },
         "deploy": {
           "builder": "@angular/fire:deploy",
           "options": {}
+=======
+>>>>>>> f2c342c7fb5979df3e8016a779b95409e29cb3b0
         }
       }
     }
   },
   "defaultProject": "todo"
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f2c342c7fb5979df3e8016a779b95409e29cb3b0
